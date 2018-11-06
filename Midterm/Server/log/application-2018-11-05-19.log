@@ -1,0 +1,32 @@
+{"level":"info","message":"Create a foo"}
+{"level":"info","message":"Get all foos"}
+{"level":"info","message":"Loading Mongoose functionality"}
+{"level":"info","message":"Starting application"}
+{"level":"info","message":"HTTP Server listening on port: %d, in %s mode"}
+{"level":"error","message":"File not found"}
+{"level":"info","message":"Get all foos"}
+{"level":"info","message":"Loading Mongoose functionality"}
+{"level":"info","message":"Starting application"}
+{"level":"info","message":"HTTP Server listening on port: %d, in %s mode"}
+{"level":"info","message":"Mongoose connected to the database"}
+{"level":"info","message":"Loading Mongoose functionality"}
+{"level":"info","message":"Starting application"}
+{"level":"info","message":"HTTP Server listening on port: %d, in %s mode"}
+{"level":"error","message":"File not found"}
+{"level":"info","message":"Get all foos"}
+{"level":"info","message":"Get all foos"}
+{"level":"info","message":"Create a foo"}
+{"level":"info","message":"Loading Mongoose functionality"}
+{"level":"info","message":"Starting application"}
+{"level":"info","message":"HTTP Server listening on port: %d, in %s mode"}
+{"level":"error","message":"File not found"}
+{"level":"info","message":"Get all foos"}
+{"level":"info","message":"Get all foos"}
+{"level":"error","message":"File not found"}
+{"level":"info","message":"Update a foo"}
+{"level":"info","message":"Get all foos"}
+{"level":"error","message":"File not found"}
+{"level":"info","message":"Get a specific foo %s"}
+{"level":"error","message":"File not found"}
+{"level":"info","message":"Update a foo"}
+{"level":"info","message":"Get a specific foo %s"}
