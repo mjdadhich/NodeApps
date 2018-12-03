@@ -16,16 +16,16 @@ module.exports = function (app, config) {
         logger.log('info', 'Get all HelpTickets');
         let query = HelpTicket.find();
         query.sort(req.query.order)
-               .populate({path: 'personId', model: 'User', select: 'lastName firstName fullName'} )
-               .populate({path: 'ownerId', model: 'User', select: 'lastName firstName fullName'} );
-       
-               if(req.query.status){
-                  if(req.query.status[0] == '-'){
-                        query.where('status').ne(req.query.status.substring(1));
-                  } else {
-                     query.where('status').eq(req.query.status);
-               }
-          }
+            .populate({ path: 'personId', model: 'User', select: 'lastName firstName fullName' })
+            .populate({ path: 'ownerId', model: 'User', select: 'lastName firstName fullName' });
+
+        if (req.query.status) {
+            if (req.query.status[0] == '-') {
+                query.where('status').ne(req.query.status.substring(1));
+            } else {
+                query.where('status').eq(req.query.status);
+            }
+        }
         await query.exec().then(result => {
             res.status(200).json(result);
         })
@@ -45,7 +45,7 @@ module.exports = function (app, config) {
     }));
     router.post('/helpTickets', asyncHandler(async (req, res) => {
         logger.log('info', 'Creating HelpTicket');
-       // req.body.content = [req.body.content]; he took out this in the video@3:27
+        // req.body.content = [req.body.content]; he took out this in the video@3:27
         var helpTicket = new HelpTicket(req.body);//changed user and User here respectively
         const result = await helpTicket.save() //changed this from user to helpTicket
         //  .then(result => {
@@ -81,5 +81,5 @@ module.exports = function (app, config) {
         const result = await helpTicketContent.save()
         res.status(201).json(result);
     }));
-//goign to need to add something here to...upload contents
+    //goign to need to add something here to...upload contents
 };

@@ -21,6 +21,8 @@ export class DataServices {
                 .withInterceptor({
                     request(request) {
                         console.log('Requesting ${request.method} ${request.url}');
+                        var authHeader = 'Bearer ' + localStorage.getItem('aurelia_token')
+                        request.headers.append('Authorization', authHeader);
                         return request;
                     },
                     response(response) {

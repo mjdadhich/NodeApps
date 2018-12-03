@@ -7,19 +7,22 @@ var config = {
         root: rootPath,
         app: { name: 'Class Project' },
         port: 5000,
-        db: 'mongodb://127.0.0.1/helpMe-dev'
+        db: 'mongodb://127.0.0.1/helpMe-dev',
+        secret: "cayennedlikedhistreats"
     },
     test: {
         root: rootPath,
         app: { name: 'UCCSS' },
         port: 4000,
-        db: 'mongodb://127.0.0.1/helpMe-test'
+        db: 'mongodb://127.0.0.1/helpMe-test',
+        secret: "cayennedlikedhistreats"
     },
     production: {
         root: rootPath,
         app: { name: 'Class Project' },
         port: 80,
-        db: 'mongodb://127.0.0.1/helpMe'
+        db: 'mongodb://127.0.0.1/helpMe',
+        secret: "cayennedlikedhistreats"
     }
 };
 

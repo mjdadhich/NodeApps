@@ -11,24 +11,65 @@ export class Users {
         this.message = 'Users';
         this.showUserEditForm = false;
     }
+    async activate() {
+        await this.getUsers();
+    }
+
+    attached() {
+        feather.replace()
+    }
+
+    async getUsers() {
+        await this.users.getUsers();
+    }
 
     newUser() {
         this.user = {
-        firstName: "",
-        lastName: "",
-        active: true,
-        role: "user",
-        email: "",
-        password: ""
+            firstName: "",
+            lastName: "",
+            active: true,
+            role: "user",
+            email: "",
+            password: ""
         }
-            this.showUserEditForm = true;
+        this.openEditForm();
+    }
+
+    editUser(user) {
+        this.user = user;
+        this.openEditForm();
+    }
+
+    openEditForm() {
+        this.showUserEditForm = true;
+        setTimeout(() => { $("#firstName").focus(); }, 500);
+    }
+
+    changeActive(user) {
+        this.user = user;
+        this.save();
+    }
+
+    async save() {
+        if (this.user && this.user.firstName && this.user.lastName
+            && this.user.email && this.user.password)
+            await this.users.saveUser(this.user);
+        await this.getUsers();
+        this.back();
+    }
+
+    async delete() {
+        if (this.user) {
+            await this.users.delete(this.user);
+            await this.getUsers();
+            this.back();
         }
-        
-        async save(){
-            if(this.user && this.user.firstName && this.user.lastName 
-                && this.user.email && this.user.password){
-                await this.users.saveUser(this.user);
-                }
-            }            
+    }
+
+    back() {
+        this.showUserEditForm = false;
+    }
+    //made a slight variation to this code based on Users video 26:14 mark 11/22        
+
 }
 

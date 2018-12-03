@@ -58,14 +58,17 @@ module.exports = function (app, config) {
         res.status(404);
         res.send('404 Not Found');
     });
-
     app.use(function (err, req, res, next) {
-        console.error(err.stack);
+        console.log(err)
+        if (process.env.NODE_ENV !== 'test') logger.log(err.stack,'error');
         res.type('text/plan');
-        res.status(500);
-        res.send('500 Server Error');
-    });
-
+        if(err.status){
+          res.status(err.status).send(err.message);
+        } else {
+          res.status(500).send('500 Sever Error');
+        }
+      });
+    
     logger.log('info', "Starting application");
 
 };
