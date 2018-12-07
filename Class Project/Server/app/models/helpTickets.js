@@ -22,4 +22,11 @@ var helpTicketSchema = new Schema({
     dateCreated: { type: Date, default: Date.now }
 });
 
+//experimenting with something here due to issue with creating a new help ticket on 12/4
+//helpTicketSchema.virtual('Schema.Types.ObjectId')
+//.get(function () {
+//return this._id;
+//});
+
+
 module.exports = Mongoose.model('helpTicket', helpTicketSchema);

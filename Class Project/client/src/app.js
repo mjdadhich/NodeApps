@@ -23,8 +23,14 @@ export class App {
         name: ' Users',
         auth: true 
 //going to need another route for helptickets around here
+      },
+      {
+        route: 'helpTickets',
+        moduleId: './modules/helpTickets',
+        name: 'helpTickets',
+        auth: true 
       }
-
+//hopefully what i've written above is correct! added route 12/3
     ]);
   }
 }

@@ -1,0 +1,43 @@
+<!---took code from tableusers.html, deleted part, and inserted code from ppt on 12/3-->
+<template>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th colspan="4">
+                                <!--changed other parts of this too-->
+                                <span click.trigger="newHelpTicket()"><i data-feather="plus"></i></span>
+                                <span click.trigger="editHelpTicket()" style="margin-left:5px;"><i data-feather="edit"></i></span>
+                            </th>
+                        </tr>
+                        <!--changed other parts of this too-->
+                        <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col">personId</th>
+                            <th scope="col">ownerId</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!---inserted code from slide 4 of helpticks ppt here-->
+                        <tr click.trigger="editHelpTicket(helpTicket)" repeat.for="helpTicket of helpTickets.helpTicketsArray">
+                            <td>${helpTicket.title}</td>
+                            <td>${helpTicket.status}</td>
+                            <td>${helpTicket.personId.firstName} ${helpTicket.personId.lastName} </td>
+                            <td>${helpTicket.ownerId.firstName} ${helpTicket.ownerId.lastName} </td>
+                        </tr>
+                        <!--commenting out this checkbox feature
+                                    <div class="form-check">
+                                        <input class="form-check-input" change.delegate="changeActive(user)" checked.bind="user.active"
+                                            type="checkbox" value="" id="defaultCheck1"></div>
+--->
+                        </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</template>

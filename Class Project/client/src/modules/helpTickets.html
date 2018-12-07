@@ -1,0 +1,10 @@
+<!--realized i needed this and added it utilising code from users.html-->
+<!---was having issue with my form...Hs needed capitalization below
+because it connects to the code near top of helpTickets.js-->
+<template>
+            <h1>${message}</h1>
+             <compose show.bind="showHelpTicketEditForm" view="./components/editHelpTicket.html"></compose>
+        <compose show.bind="!showHelpTicketEditForm" view="./components/tableHelpTickets.html"></compose>
+    </template>
+
+<!--the above should be correct, however if there is an issue with helpTicketEditForm somewhere else, then it may not work-->

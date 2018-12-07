@@ -42,7 +42,12 @@ userSchema.methods.comparePassword = function (passw, cb) {
         cb(null, isMatch);
     });
 };
-//something else goes here too (start of auth video)
+//something else goes here too (start of auth video) wow, caught this on 12/4
+//UserSchema.virtual('fullName')
+//.get(function () {
+//return this.firstName + ' ' + this.lastName;
+//});
+
 module.exports =
     Mongoose.model('User', userSchema);
 
