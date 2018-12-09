@@ -12,7 +12,7 @@ var express = require('express'),
 module.exports = function (app, config) {
     app.use('/api', router);
     //edited get all helptickets per feedback/photo 12/3...ISSUE HERE
-    router.get('/helpTickets/user/:id', asyncHandler(async (req, res) => {
+    router.get('/helpTickets', asyncHandler(async (req, res) => {
         logger.log('info', 'Get all HelpTickets');
         let query = HelpTicket.find({ personId: req.params.id });
         query.sort(req.query.order)
@@ -75,8 +75,9 @@ module.exports = function (app, config) {
                 res.status(200).json(result);
             })//going to need to add something here to delete content 
     }));
-    //content section
-    router.get('/helpTicketContents', asyncHandler(async (req, res) => {
+    //content section--12/8 TEMPORARY CHANGE TO /helpTicketContent instead of /helpTicketContents
+    //note here i also made similar TEMPORARY CHANGES TO help-ticket-object url and to the route in app.js
+    router.get('/helpTicketContent', asyncHandler(async (req, res) => {
         logger.log('info', 'Getting HelpTicket Content');
         let query = HelpTicketContent.find();
         query.sort(req.query.order)

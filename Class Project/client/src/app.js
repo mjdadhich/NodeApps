@@ -29,8 +29,15 @@ export class App {
         moduleId: './modules/helpTickets',
         name: 'helpTickets',
         auth: true 
-      }
+      },
 //hopefully what i've written above is correct! added route 12/3
+//ADDING ANOTHER ROUTE ON 12/8 FOR HELP TICKET CONTENTS -- NOT SURE IF CORRECT
+{
+  route: 'helpTicketContent',
+  moduleId: './modules/helpTickets',//there is no module for content, so would it be directed to helptix??
+  name: 'helpTicketContent',//does the name matter?
+  auth: true 
+}
     ]);
   }
 }

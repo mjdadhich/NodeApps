@@ -21,9 +21,9 @@ export class helpTickets {//plural
     attached() {
         feather.replace()
     }
-    //adding this from users.js on 12/5 and edited to suit this section***might need another line
+    //edited this on 12/8, passing in this.userObj, like activate method above
     async getHelpTickets() {
-        await this.helpTickets.getHelpTickets()
+        await this.helpTickets.getHelpTickets(this.userObj)
     }
     newHelpTicket() {
         this.helpTicket = {
@@ -44,14 +44,13 @@ export class helpTickets {//plural
             personId: this.userObj._id,
             content: ""
         };
-        await this.helpTickets.getHelpTicketsContents(helpTicket._id)
+        await this.helpTickets.getHelpTicketsContents(helpTicket._id) //why is this get Tickets vs Ticket?
         this.showEditForm();
-    }//changed from show to open
+    }//changed from show to open?
     //added this from users.js and edited***
-
     showEditForm() {
-        this.showHelpTicketEditForm = true;
-        setTimeout(() => { $("#firstName").focus(); }, 500);
+      this.showHelpTicketEditForm = true;
+        //setTimeout(() => { $("#firstName").focus(); }, 500);
     }
     //might need to remove or fix the above code added 12/4
     async save() {
@@ -65,14 +64,14 @@ export class helpTickets {//plural
             this.back();
         }
     }
-
-    //adding this, think it might be necessary!
+    
     back() {
-        this.showHelpTicketEditForm = false;
+       this.showHelpTicketEditForm = false;
     }
-    //trying this out to try to fix issue with saving new help tick
-    //save() {
-    //  this.showHelpTicketEditForm = false;
-    //}
+//EXPERIMENTAL CODE HERE FOR CONTENTS, DONT KNOW IF NEEDED 12/9 or instead more needed inside getHelpTickets
+async getHelpTicketContents() {
+    await this.helpTickets.getHelpTicketsContents(this.helpTicketContent) 
+}
+
 
 }//things have to go inside this curly bracket
