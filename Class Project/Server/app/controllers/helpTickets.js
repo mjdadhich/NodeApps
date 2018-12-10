@@ -11,10 +11,10 @@ var express = require('express'),
 //will need to add a route  which allows certain users to get all help tickets vs their own...12/3
 module.exports = function (app, config) {
     app.use('/api', router);
-    //edited get all helptickets per feedback/photo 12/3...ISSUE HERE
+    //ATTEMPTED TO FIX CODE HERE on 12/10 PER EMAIL 
     router.get('/helpTickets', asyncHandler(async (req, res) => {
         logger.log('info', 'Get all HelpTickets');
-        let query = HelpTicket.find({ personId: req.params.id });
+        let query = HelpTicket.find();//took out {personId: req.params.id}
         query.sort(req.query.order)
             .populate({ path: 'personId', model: 'User', select: 'lastName firstName fullName' })
             .populate({ path: 'ownerId', model: 'User', select: 'lastName firstName fullName' });
@@ -30,7 +30,27 @@ module.exports = function (app, config) {
             res.status(200).json(result);
         })
     }));
-    //thought i need to edit this, but actually it is the get all help tickets above that may need it
+//ADDING ROUTE HERE PER EMAIL 12/10
+router.get('/helpTickets/user/:id', asyncHandler(async (req, res) => {
+    logger.log('info', 'Get all HelpTickets');
+    let query = HelpTicket.find({personId: req.params.id});
+    query
+        .sort(req.query.order)
+        .populate({ path: 'personId', model: 'User', select: 'lastName firstName fullName' })
+        .populate({ path: 'ownerId', model: 'User', select: 'lastName firstName fullName' });
+
+    if (req.query.status) {
+        if (req.query.status[0] == '-') {
+            query.where('status').ne(req.query.status.substring(1));
+        } else {
+            query.where('status').eq(req.query.status);
+        }
+    }
+    await query.exec().then(result => {
+        res.status(200).json(result);
+    })
+}));
+    //not sure i need this route
     router.get('/helpTickets/:id', asyncHandler(async (req, res) => {
         logger.log('info', 'Get HelpTicket %s', req.params.id);
         await HelpTicket.findById(req.params.id).then(result => {

@@ -11,11 +11,11 @@ export class helpTicket { //should be ok
         this.HELP_CONTENT_SERVICE = 'helpTicketContents'; //added s back to content
         //12/8 added line above b/c i think it is needed for the getHelpTicketsContents method at bottom
     }
-
+//EDITING MY getHelpTickets BELOW on 12/10 PER EMAIL...
     //get help tickets
     async getHelpTickets(userObj) {
         let url = this.HELP_TICKET_SERVICE;
-        if (userObj.role == 'user') {
+        if (userObj.role !== 'staff' && userObj.role !== 'admin') {
             url += '/user/' + userObj._id;
         }
         let response = await this.data.get(url);
