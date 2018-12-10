@@ -12,7 +12,7 @@ export class helpTickets {//plural
         this.helpTickets = helpTicket;
         this.showHelpTicketEditForm = false; //should this really be false?
         this.userObj = JSON.parse(sessionStorage.getItem('userObj'));
-        //this.openEditForm = false;
+        //this.showHelpTicketEditForm = false;
         //added line above after looking again at users.js
     }
     async activate() {
@@ -37,16 +37,16 @@ export class helpTickets {//plural
             content: ""
         };
         this.showEditForm();
-    }//changed from show to open
+    }//ensured this was correct on 12/9
     async editHelpTicket(helpTicket) {
         this.helpTicket = helpTicket;
         this.helpTicketContent = {
             personId: this.userObj._id,
             content: ""
         };
-        await this.helpTickets.getHelpTicketsContents(helpTicket._id) //why is this get Tickets vs Ticket?
+        await this.helpTickets.getHelpTicketsContents(helpTicket._id) //this is as it should be
         this.showEditForm();
-    }//changed from show to open?
+    }
     //added this from users.js and edited***
     showEditForm() {
       this.showHelpTicketEditForm = true;
@@ -69,8 +69,8 @@ export class helpTickets {//plural
        this.showHelpTicketEditForm = false;
     }
 //EXPERIMENTAL CODE HERE FOR CONTENTS, DONT KNOW IF NEEDED 12/9 or instead more needed inside getHelpTickets
-async getHelpTicketContents() {
-    await this.helpTickets.getHelpTicketsContents(this.helpTicketContent) 
+async getHelpTicketsContents() {
+    await this.helpTickets.getHelpTicketsContents(helpTicket._id) 
 }
 
 

@@ -43,7 +43,7 @@ module.exports = function (app, config) {
         await HelpTicket.findOneAndUpdate({ _id: req.body.helpTicket._id }, req.body.helpTicket, { new: true })
             .then(result => {
                 if (req.body.content) {
-                    req.body.content.helpTicketId = result._id;
+                    req.body.content.helpTicketId = result._id;//issue with helpTicketId?
                     var helpTicketContent = new HelpTicketContent(req.body.content);
                     helpTicketContent.save()
                         .then(content => {
@@ -60,7 +60,7 @@ module.exports = function (app, config) {
         var helpTicket = new HelpTicket(req.body.helpTicket);
         await helpTicket.save() 
             .then(result => {
-                req.body.content.helpTicketId = result._id;
+                req.body.content.helpTicketId = result._id;//issue with helpTicketId?
                 var helpTicketContent = new HelpTicketContent(req.body.content);
                 helpTicketContent.save()
                     .then(content => {
@@ -75,9 +75,8 @@ module.exports = function (app, config) {
                 res.status(200).json(result);
             })//going to need to add something here to delete content 
     }));
-    //content section--12/8 TEMPORARY CHANGE TO /helpTicketContent instead of /helpTicketContents
-    //note here i also made similar TEMPORARY CHANGES TO help-ticket-object url and to the route in app.js
-    router.get('/helpTicketContent', asyncHandler(async (req, res) => {
+//thinking may need to review this GET later
+    router.get('/helpTicketContents', asyncHandler(async (req, res) => {
         logger.log('info', 'Getting HelpTicket Content');
         let query = HelpTicketContent.find();
         query.sort(req.query.order)
@@ -85,9 +84,12 @@ module.exports = function (app, config) {
             res.status(200).json(result);
         })
     }));
-    router.get('/helpTicketContent/helpTicket/:id', asyncHandler(async (req, res) => {
-        logger.log('info', 'Getting a HelpTickets content %s', req.params.id);
+    //updates made to code below on 12/9
+    router.get('/helpTicketContents/helpTicket/:id', asyncHandler(async (req, res) => {
+        logger.log('info', 'Getting a HelpTickets Content', req.params.id);
         let query = HelpTicketContent.find({ helpTicketId: req.params.id })
+        .sort('-dateCreated')
+        .populate({ path: 'personId', model: 'User', select: 'lastName firstName fullName' })
         await query.exec().then(result => {
             res.status(200).json(result);
         })
