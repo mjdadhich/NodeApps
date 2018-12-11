@@ -49,7 +49,7 @@ export class helpTickets {//plural
     }
     //added this from users.js and edited***
     showEditForm() {
-      this.showHelpTicketEditForm = true;
+        this.showHelpTicketEditForm = true;
         //setTimeout(() => { $("#firstName").focus(); }, 500);
     }
     //might need to remove or fix the above code added 12/4
@@ -59,19 +59,35 @@ export class helpTickets {//plural
                 this.helpTicket.ownerId = this.userObj._id;
             }
             let helpTicket = { helpTicket: this.helpTicket, content: this.helpTicketContent }
-            await this.helpTickets.saveHelpTicket(helpTicket);
+            let serverResponse = await this.helpTickets.saveHelpTicket(helpTicket);
+            if (this.filesToUpload && this.filesToUpload.length > 0) this.helpTickets.uploadFile(this.filesToUpload, serverResponse.contentID);
             await this.getHelpTickets();
             this.back();
         }
     }
-    
-    back() {
-       this.showHelpTicketEditForm = false;
-    }
-//EXPERIMENTAL CODE HERE FOR CONTENTS, DONT KNOW IF NEEDED 12/9 or instead more needed inside getHelpTickets
-async getHelpTicketsContents() {
-    await this.helpTickets.getHelpTicketsContents(helpTicket._id) 
-}
 
+    back() {
+        this.showHelpTicketEditForm = false;
+        this.showHelpTicketDisplayForm = false; //added on 12/10, but don't have anywhere else...
+        this.filesToUpload = new Array();
+        this.files = new Array();
+
+    }
+    //EXPERIMENTAL CODE HERE FOR CONTENTS, DONT KNOW IF NEEDED 12/9 or instead more needed inside getHelpTickets
+    async getHelpTicketsContents() {
+        await this.helpTickets.getHelpTicketsContents(helpTicket._id)
+    }
+
+    //added 12/10
+    changeFiles() {
+        this.filesToUpload = this.filesToUpload ? this.filesToUpload : new Array();
+        for (var i = 0; i < this.files.length; i++) {
+            let addFile = true;
+            this.filesToUpload.forEach(item => {
+                if (item.name === this.files[i].name) addFile = false;
+            })
+            if (addFile) this.filesToUpload.push(this.files[i]);
+        }
+    }
 
 }//things have to go inside this curly bracket

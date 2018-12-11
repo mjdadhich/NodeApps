@@ -51,4 +51,9 @@ export class helpTicket { //should be ok
             this.helpTicketsContentsArray = [];
         }
     }
+
+    async uploadFile(files, id) {
+        await this.data.uploadFiles(files, this.HELP_CONTENT_SERVICE + "/upload/" + id );
+    }
+    
 }//stuff has to be inside this curly bracket

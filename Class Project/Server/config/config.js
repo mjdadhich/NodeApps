@@ -8,21 +8,24 @@ var config = {
         app: { name: 'Class Project' },
         port: 5000,
         db: 'mongodb://127.0.0.1/helpMe-dev',
-        secret: "cayennedlikedhistreats"
+        secret: "cayennedlikedhistreats",
+        uploads: './public/uploadedFiles'
     },
     test: {
         root: rootPath,
         app: { name: 'UCCSS' },
         port: 4000,
         db: 'mongodb://127.0.0.1/helpMe-test',
-        secret: "cayennedlikedhistreats"
+        secret: "cayennedlikedhistreats",
+        uploads: './public/uploadedFiles'
     },
     production: {
         root: rootPath,
         app: { name: 'Class Project' },
         port: 80,
         db: 'mongodb://127.0.0.1/helpMe',
-        secret: "cayennedlikedhistreats"
+        secret: "cayennedlikedhistreats",
+        uploads: './public/uploadedFiles'
     }
 };
 
