@@ -52,12 +52,12 @@ export class Users {
 
     async save() {
         if (this.user && this.user.firstName && this.user.lastName
-            && this.user.email && this.user.password)
+            && this.user.email && this.user.password) {//adding curly bracket here 12/10
             await this.users.saveUser(this.user);
         await this.getUsers();
         this.back();
     }
-
+    }//and here 12/10 --seemed like it was wrong!
     async delete() {
         if (this.user) {
             await this.users.delete(this.user);

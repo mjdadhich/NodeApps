@@ -1,0 +1,5 @@
+<template>
+        <h1>${message}</h1>
+         <compose show.bind="showtodoForm" view="./components/todoForm.html"></compose>
+    <compose show.bind="!showtodoForm" view="./components/todoTable.html"></compose>
+</template>
